@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, Text, Button } from 'react-native';
+import { StyleSheet, View, Dimensions } from 'react-native';
 import { EditModal } from '../../components/EditModal';
+import { AppButton } from '../../components/ui/AppButton';
 import { AppCard } from '../../components/ui/AppCard';
+import { AppTextBold } from '../../components/ui/AppTextBold';
 
 import { THEME } from '../../theme';
+import { FontAwesome, AntDesign } from '@expo/vector-icons';
 
 export const TodoScreen = ({ todo, goBack, onRemove, onSave }) => {
   const [modal, setModal] = useState(false);
@@ -16,22 +19,26 @@ export const TodoScreen = ({ todo, goBack, onRemove, onSave }) => {
   return (
     <View>
       <AppCard style={styles.card}>
-        <Text style={styles.title}>{todo.title}</Text>
-
-        <Button title="Редактировать" onPress={() => setModal(true)} />
+        <AppTextBold style={styles.title}>{todo.title}</AppTextBold>
+        <AppButton onPress={() => setModal(true)}>
+          <FontAwesome name="edit" size={20} />
+        </AppButton>
       </AppCard>
 
       <View style={styles.buttons}>
         <View style={styles.button}>
-          <Button title="Назад" color={THEME.GREY_COLOR} onPress={goBack} />
+          <AppButton color={THEME.GREY_COLOR} onPress={goBack}>
+            <AntDesign name="back" size={20} color="#fff" />
+          </AppButton>
         </View>
 
         <View style={styles.button}>
-          <Button
-            title="Удалить"
+          <AppButton
             color={THEME.DANGER_COLOR}
             onPress={() => onRemove(todo.id)}
-          />
+          >
+            <FontAwesome name="remove" size={20} color="#fff" />
+          </AppButton>
         </View>
       </View>
 
@@ -55,7 +62,7 @@ const styles = StyleSheet.create({
     padding: 15,
   },
   button: {
-    width: '40%',
+    width: Dimensions.get('window').width > 400 ? 150 : 100,
   },
   title: {
     fontSize: 20,

@@ -8,6 +8,7 @@ import {
   Alert,
 } from 'react-native';
 import { THEME } from '../../theme';
+import { AppButton } from '../ui/AppButton';
 
 export const EditModal = ({ modalVisible, handleModal, value, onSave }) => {
   const [title, setTitle] = useState(value);
@@ -39,12 +40,10 @@ export const EditModal = ({ modalVisible, handleModal, value, onSave }) => {
         />
 
         <View style={styles.buttons}>
-          <Button
-            title="Отменить"
-            onPress={handleModal}
-            color={THEME.DANGER_COLOR}
-          />
-          <Button title="Сохранить" onPress={saveHandler} />
+          <AppButton onPress={handleModal} color={THEME.DANGER_COLOR}>
+            Отменить
+          </AppButton>
+          <AppButton onPress={saveHandler}>Сохранить</AppButton>
         </View>
       </View>
     </Modal>
