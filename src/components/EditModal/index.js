@@ -3,7 +3,6 @@ import {
   View,
   StyleSheet,
   TextInput,
-  Button,
   Modal,
   Alert,
 } from 'react-native';
@@ -26,6 +25,11 @@ export const EditModal = ({ modalVisible, handleModal, value, onSave }) => {
     }
   };
 
+  const cancelHandler = () => {
+    setTitle(value);
+    handleModal();
+  };
+
   return (
     <Modal visible={modalVisible} animationType="slide" transparent={false}>
       <View style={styles.wrap}>
@@ -40,7 +44,7 @@ export const EditModal = ({ modalVisible, handleModal, value, onSave }) => {
         />
 
         <View style={styles.buttons}>
-          <AppButton onPress={handleModal} color={THEME.DANGER_COLOR}>
+          <AppButton onPress={cancelHandler} color={THEME.DANGER_COLOR}>
             Отменить
           </AppButton>
           <AppButton onPress={saveHandler}>Сохранить</AppButton>
